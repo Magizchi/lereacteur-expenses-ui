@@ -44,6 +44,7 @@
 	grid-row: 1;
 	color: red;
 	border: 1px solid black;
+	overflow-y: auto;
 }
 .quatre {
 	display: grid;
