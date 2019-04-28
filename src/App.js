@@ -11,16 +11,19 @@ class App extends React.Component {
 	};
 
 	componentDidMount = async () => {
-		const response = await axios.get('http://localhost:3600/');
+		const response = await axios.get('https://lereacteur2-back.herokuapp.com/' || 'http://localhost:3600/');
 		this.setState({
 			users: response.data
 		});
 	};
 	// ADD USER
 	addUser = async () => {
-		const response = await axios.post('http://localhost:3600/create/user', {
-			user: this.state.user
-		});
+		const response = await axios.post(
+			'https://lereacteur2-back.herokuapp.com/create/user' || 'http://localhost:3600/create/user',
+			{
+				user: this.state.user
+			}
+		);
 		const newUser = this.state.users.slice();
 		newUser.push(response.data.newUsers);
 		this.setState({
@@ -30,11 +33,14 @@ class App extends React.Component {
 	};
 	// ADD EXPENSE
 	addExpense = async () => {
-		const response = await axios.post('http://localhost:3600/update', {
-			choix: this.state.choix,
-			montant: this.state.montant,
-			lieu: this.state.lieu
-		});
+		const response = await axios.post(
+			'https://lereacteur2-back.herokuapp.com/update' || 'http://localhost:3600/update',
+			{
+				choix: this.state.choix,
+				montant: this.state.montant,
+				lieu: this.state.lieu
+			}
+		);
 		let newUser = this.state.users.findIndex((user) => response.data.user._id === user._id);
 		this.state.users[newUser] = response.data.user;
 		this.setState({
